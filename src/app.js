@@ -8,8 +8,6 @@ const cookieParser = require("cookie-parser");
 const authUser = require("./middlewares/auth");
 const app = express();
 
-console.log(process.env.NODE_ENV);
-
 const port = process.env.PORT || 1207;
 app.use(express.json());
 app.use(cookieParser());
