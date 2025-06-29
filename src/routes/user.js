@@ -7,9 +7,6 @@ const userRouter = express.Router();
 const DATA_FEILDS = ["firstName", "lastName", "skills", "about"];
 
 userRouter.get("/user/request", authUser, async (req, res) => {
-  // -> In connectionResquest which as login user Id in toUser
-  // -> status should be in interested
-
   try {
     const loginUser = req.user;
     const connectionRequest = await ConnectionRequest.find({
@@ -29,9 +26,6 @@ userRouter.get("/user/request", authUser, async (req, res) => {
 });
 
 userRouter.get("/user/connections", authUser, async (req, res) => {
-  // fromUserId equals to login user and status accepted or
-  // toUserId equal to login user and status accepted
-
   try {
     const loginUser = req.user;
 
@@ -53,7 +47,7 @@ userRouter.get("/user/connections", authUser, async (req, res) => {
     if (!connections) throw new Error("No Connections Found!");
 
     const data = connections.map((each) => {
-      if (each.fromUserId.toString() === loginUser._id.toString()) {
+      if (each.fromUserId._id.toString() === loginUser._id.toString()) {
         return each.toUserId;
       }
       return each.fromUserId;

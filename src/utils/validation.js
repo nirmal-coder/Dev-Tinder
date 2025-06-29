@@ -10,6 +10,23 @@ const signUpValidation = (req) => {
   }
 };
 
+const patchValidation = (req) => {
+  const VALID_FIELDS = [
+    "age",
+    "gender",
+    "skills",
+    "lastName",
+    "firstName",
+    "about",
+  ];
+  const isValidData = Object.keys(req.body).every((v) =>
+    VALID_FIELDS.includes(v)
+  );
+
+  return isValidData;
+};
+
 module.exports = {
   signUpValidation,
+  patchValidation,
 };

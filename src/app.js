@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const authRouter = require("./routes/auth");
-const profileRouter = require("./routes/user");
+const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/requests");
 const userRouter = require("./routes/user");
 

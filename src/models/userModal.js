@@ -50,6 +50,10 @@ const userSchema = new Schema(
       },
       required: [true, "Gender is Required!"],
     },
+    about: {
+      type: String,
+      maxLength: 300,
+    },
   },
   { timestamps: true }
 );
@@ -68,6 +72,4 @@ userSchema.methods.isPasswordValid = function (userInputPassword) {
 };
 const User = model("User", userSchema);
 
-module.exports = {
-  User,
-};
+module.exports = User;
