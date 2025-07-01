@@ -34,7 +34,7 @@ profileRouter.patch("/profile/edit", authUser, async (req, res) => {
       { ...req.body },
       { returnDocument: "after", runValidators: true }
     );
-    console.log(updateUser);
+
     res.send("updated successfully!!!");
   } catch (error) {
     res.status(400).send(error.message);
