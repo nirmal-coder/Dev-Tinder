@@ -9,6 +9,7 @@ const authRouter = express.Router();
 // /SIGN IN API
 authRouter.post("/signin", async (req, res) => {
   const { firstName, lastName, emailId, password, age, gender } = req.body;
+  console.log(req);
   try {
     const isValidPassword = isStrongPassword(password);
     if (!isValidPassword) throw new Error("Enter a Strong password!");
@@ -24,7 +25,10 @@ authRouter.post("/signin", async (req, res) => {
       });
 
       await user.save();
-      res.send("Signup Successfully!");
+      res.json({
+        data: user,
+        message: "signin Success😁",
+      });
     }
   } catch (error) {
     res.send(error.message);

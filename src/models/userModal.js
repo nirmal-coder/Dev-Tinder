@@ -37,7 +37,7 @@ const userSchema = new Schema(
     age: {
       type: Number,
       min: 18,
-      required: [true, "Age is Required"],
+      // required: [true, "Age is Required"],
     },
     skills: {
       type: [String],
@@ -48,7 +48,7 @@ const userSchema = new Schema(
         values: ["male", "female", "others"],
         message: "gender is not Valid!",
       },
-      required: [true, "Gender is Required!"],
+      // required: [true, "Gender is Required!"],
     },
     about: {
       type: String,
