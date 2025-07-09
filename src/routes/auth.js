@@ -6,6 +6,8 @@ const User = require("../models/userModal");
 
 const authRouter = express.Router();
 
+const DATA_FEILDS = ["firstName", "lastName", "skills", "about"];
+
 // /SIGN IN API
 authRouter.post("/signin", async (req, res) => {
   const { firstName, lastName, emailId, password, age, gender } = req.body;
@@ -40,7 +42,7 @@ authRouter.post("/signin", async (req, res) => {
 authRouter.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
-    const user = await User.findOne({ emailId: emailId });
+    const user = await User.findOne({ emailId });
     if (!user) throw new Error("Invalid credentials!");
     const isValidPassword = await user.isPasswordValid(password);
     if (!isValidPassword) throw new Error("Invalid Password!");
@@ -49,7 +51,20 @@ authRouter.post("/login", async (req, res) => {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    res.send("login Success😁");
+
+    const data = {
+      firstName: user.firstName,
+      lastname: user.lastName,
+      skills: user.skills,
+      about: user?.about,
+      age: user?.gender,
+      gender: user?.gender,
+    };
+
+    res.json({
+      data: data,
+      message: "login Successfully😁",
+    });
   } catch (error) {
     res.status(400).send(error.message);
   }
