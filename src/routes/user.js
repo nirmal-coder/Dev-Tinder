@@ -5,7 +5,7 @@ const User = require("../models/userModal");
 
 const userRouter = express.Router();
 
-const DATA_FEILDS = ["firstName", "lastName", "skills", "about"];
+const DATA_FEILDS = ["firstName", "lastName", "skills", "about", "photo"];
 
 userRouter.get("/user/request", authUser, async (req, res) => {
   try {

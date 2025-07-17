@@ -26,9 +26,18 @@ authRouter.post("/signin", async (req, res) => {
         gender,
       });
 
-      await user.save();
+      const SignIndata = await user.save();
+      const data = {
+        firstName: SignIndata.firstName,
+        lastname: SignIndata.lastName,
+        skills: SignIndata.skills,
+        about: SignIndata?.about,
+        age: SignIndata?.gender,
+        gender: SignIndata?.gender,
+        photo: SignIndata?.photo,
+      };
       res.json({
-        data: user,
+        data: data,
         message: "signin Success😁",
       });
     }
@@ -49,6 +58,8 @@ authRouter.post("/login", async (req, res) => {
     const token = await user.getJwt(user._id);
     res.cookie("token", token, {
       httpOnly: true,
+      secure: false, // Todo : change to true in production and sameSite : none
+      sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -59,6 +70,7 @@ authRouter.post("/login", async (req, res) => {
       about: user?.about,
       age: user?.gender,
       gender: user?.gender,
+      photo: user?.photo,
     };
 
     res.json({

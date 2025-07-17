@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const { isStrongPassword, isEmail, isLowercase } = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { default: isURL } = require("validator/lib/isURL");
 const userSchema = new Schema(
   {
     firstName: {
@@ -49,6 +50,16 @@ const userSchema = new Schema(
         message: "gender is not Valid!",
       },
       // required: [true, "Gender is Required!"],
+    },
+    photo: {
+      type: String,
+      validate(url) {
+        if (!isURL(url)) {
+          throw new Error("URL is not valid!!!");
+        }
+      },
+      default:
+        "https://static.vecteezy.com/system/resources/previews/001/840/612/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
     },
     about: {
       type: String,

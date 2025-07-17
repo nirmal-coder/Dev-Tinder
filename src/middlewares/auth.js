@@ -3,6 +3,8 @@ const User = require("../models/userModal");
 
 const authUser = async (req, res, next) => {
   const { token } = req.cookies;
+  console.log(token);
+
   if (!token) throw new Error("Token not Valid");
   const { _id } = await jwt.verify(token, process.env.JWT_KEY);
   const user = await User.findById(_id);
