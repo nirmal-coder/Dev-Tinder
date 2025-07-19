@@ -22,7 +22,9 @@ userRouter.get("/user/request", authUser, async (req, res) => {
       message: "All connection request sended!",
     });
   } catch (error) {
-    res.send("Error : " + error.message);
+    res.status(500).json({
+      message: "Something Went Wrong!",
+    });
   }
 });
 
@@ -57,7 +59,7 @@ userRouter.get("/user/connections", authUser, async (req, res) => {
       message: "All connection request recieved successfully!",
     });
   } catch (error) {
-    res.status(400).send("Error : " + error);
+    res.status(500).send("Error : " + error);
   }
 });
 

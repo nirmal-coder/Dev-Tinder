@@ -50,7 +50,7 @@ requestRouter.post(
         message: message,
       });
     } catch (error) {
-      res.status(400).send("Error : " + error.message);
+      res.status(400).json({ error });
     }
   }
 );
